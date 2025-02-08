@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c2v4mnfyn61dc" path="res://player/player.png" id="2_nk6wo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sguhh"]
-size = Vector2(16, 16)
+size = Vector2(8, 16)
 
 [sub_resource type="Animation" id="Animation_d1t2i"]
 length = 0.001
@@ -81,6 +81,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [3, 4]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"jump"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wond5"]
 resource_name = "falling"
@@ -112,6 +126,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [3, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"land"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_64e3o"]

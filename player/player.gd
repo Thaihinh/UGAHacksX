@@ -3,46 +3,76 @@ extends CharacterBody2D
 enum States {IDLE, WALKING, JUMPING, FALLING, LANDING}
 
 var state: States = States.IDLE
-var attacking: bool = false
+var jumping: bool = false
+var coyote: bool = true
 
-const SPEED: float = 300.0
-const JUMP_VELOCITY: float = -400.0
+const SPEED: float = 150.0
+const JUMP_VELOCITY: float = -250.0
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Gravity and falling
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		set_state(States.FALLING)
+	
+	# Bunny hop implementation
+	if Input.is_action_just_pressed("ui_accept"):
+		jumping = true
+	if Input.is_action_just_released("ui_accept"):
+		jumping = false
+	
+	# Jumping
+	if jumping and is_on_floor() and state != States.JUMPING and state != States.LANDING:
 		set_state(States.JUMPING)
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Movement
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if velocity.x > 0:
-		$Sprite.scale.x = 1
-		set_state(States.WALKING)
-	elif velocity.x < 0:
-		$Sprite.scale.x = -1
-		set_state(States.WALKING)
+	# Landing
+	if is_on_floor() and state == States.FALLING:
+		set_state(States.LANDING)
+	
+	if (velocity.x != 0):
+		# Sprite Direction
+		if velocity.x > 0:
+			$Sprite.scale.x = 1
+		elif velocity.x < 0:
+			$Sprite.scale.x = -1
+		
+		# Walking animation if grounded
+		if is_on_floor() and state != States.JUMPING and state != States.LANDING:
+			set_state(States.WALKING)
 	else:
-		set_state(States.IDLE)
+		# Idle animation if grounded
+		if is_on_floor() and state != States.JUMPING and state != States.LANDING:
+			set_state(States.IDLE)
+	
 	move_and_slide()
 
 func set_state(new_state: States) -> void:
+	# Avoid repeating animations
+	if (new_state == state):
+		return
 	state = new_state
 	match state:
 		States.IDLE:
 			$AnimationPlayer.play("idle")
 		States.WALKING:
 			$AnimationPlayer.play("walking")
+		States.JUMPING:
+			$AnimationPlayer.play("jump")
+		States.FALLING:
+			$AnimationPlayer.play("falling")
+		States.LANDING:
+			$AnimationPlayer.play("landing")
 
+# Animation calls
 func jump() -> void:
 	velocity.y += JUMP_VELOCITY
-	set_state(States.FALLING)
+
+func land() -> void:
+	set_state(States.IDLE)
