@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+enum States {IDLE, WALKING, JUMPING, FALLING}
 
+var state: States = States.IDLE
+var attacking: bool = false
+
+const SPEED: float = 300.0
+const JUMP_VELOCITY: float = -400.0
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -20,5 +24,16 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 	move_and_slide()
+
+func set_state(new_state: States) -> void:
+	state = new_state
+	match state:
+		States.IDLE:
+			$AnimationPlayer.play("idle")
+		States.WALKING:
+			$AnimationPlayer.play("walking")
+		States.JUMPING:
+			$AnimationPlayer.play("jump")
+		States.FALLING:
+			$AnimationPlayer.play("falling")
