@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="UGAHacksX"
+config/name="Bard_Adventure"
+config/description="A 2D action platformer where you play as a bard and try to survive as long as possible against an endless horde of slimes to get a high score."
 run/main_scene="res://title screen/TitleScreen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://player/player_projectile/note.png"
 
 [autoload]
 

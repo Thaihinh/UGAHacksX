@@ -9,7 +9,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_scoreboard()
-	#if Global.health <= 0:
 	if Global.health <= 0:
 		game_over()
 		

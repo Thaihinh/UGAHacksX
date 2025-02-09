@@ -702,7 +702,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5fcuw"]
-size = Vector2(8, 16)
+size = Vector2(8, 8)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
