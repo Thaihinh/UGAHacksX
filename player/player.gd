@@ -10,10 +10,17 @@ var auto_melee: bool = false
 var auto_ranged: bool = false
 var attacking: bool = false
 var attack_direction: int = 0
-var ranged_projectile: PackedScene
+var ranged_projectile: PackedScene = preload("res://player/player_projectile/player_projectile.tscn")
+var rng = RandomNumberGenerator.new()
 
-const SPEED: float = 150.0
-const JUMP_VELOCITY: float = -250.0
+const SPEED: float = 100.0
+const JUMP_VELOCITY: float = -275
+
+func _ready() -> void:
+	$GuitarSprite.visible = false
+	$RangedGuitarSprite.visible = false
+	$RangedGuitarSprite.frame = rng.randi_range(0, 3)
+	$GuitarSprite/MeleeAttack.monitorable = false
 
 func _physics_process(delta: float) -> void:
 	# Gravity and falling
@@ -27,8 +34,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("ui_accept"):
 		jumping = false
 		
-	
-	
 	# Jumping
 	if jumping and is_on_floor() and state != States.JUMPING and state != States.LANDING:
 		set_state(States.JUMPING)
@@ -48,6 +53,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("melee_attack"):
 		auto_melee = false
 	
+	# Auto ranged
+	if Input.is_action_just_pressed("ranged_attack"):
+		auto_ranged = true
+	if Input.is_action_just_released("ranged_attack"):
+		auto_ranged = false
+	
 	# Attack implementation
 	if auto_melee and not attacking:
 		$PlayerSprite.texture = no_arms
@@ -60,9 +71,9 @@ func _physics_process(delta: float) -> void:
 		$PlayerSprite.texture = no_arms
 		attacking = true
 		if attack_direction > 0:
-			$AttackAnimation.play("melee_attack_right")
+			$AttackAnimation.play("ranged_attack_right")
 		else:
-			$AttackAnimation.play("melee_attack_left")
+			$AttackAnimation.play("ranged_attack_left")
 	
 	# Landing
 	if is_on_floor() and state == States.FALLING:
@@ -115,7 +126,16 @@ func attack_end() -> void:
 		$PlayerSprite.texture = arms
 
 func ranged_attack_shoot() -> void:
-	return
+	var projectile = ranged_projectile.instantiate()
+	owner.add_child(projectile)
+	projectile.transform = $RangedGuitarSprite/NoteSpawn.global_transform
 
 func ranged_attack_end() -> void:
+	$RangedGuitarSprite.frame = rng.randi_range(0, 3)
 	attacking = false
+	if not auto_ranged:
+		$RangedGuitarSprite.visible = false
+		$PlayerSprite.texture = arms
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	print_debug("Enemy detected")

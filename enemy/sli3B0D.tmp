@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://poy26nx5grpe"]
+
+[ext_resource type="Script" path="res://enemy/slime.gd" id="1_irsk3"]
+[ext_resource type="Texture2D" uid="uid://8k7oj7b1cex6" path="res://enemy/slime.png" id="2_aou3k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnbuo"]
+atlas = ExtResource("2_aou3k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45umo"]
+atlas = ExtResource("2_aou3k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wg16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnbuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45umo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc7wf"]
+size = Vector2(16, 14)
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_irsk3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8wg16")
+frame_progress = 0.546679
+
+[node name="raycastright" type="RayCast2D" parent="."]
+target_position = Vector2(8, 0)
+
+[node name="raycastleft" type="RayCast2D" parent="."]
+target_position = Vector2(-8, 0)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_hc7wf")

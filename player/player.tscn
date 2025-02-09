@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bcf2nnsho12u6"]
+[gd_scene load_steps=22 format=3 uid="uid://bcf2nnsho12u6"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_7kraw"]
 [ext_resource type="Texture2D" uid="uid://c2v4mnfyn61dc" path="res://player/player.png" id="2_nk6wo"]
@@ -71,7 +71,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_evlx3"]
 resource_name = "jump"
-length = 0.1
+length = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -79,7 +79,7 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.05),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [3, 4]
@@ -91,7 +91,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -259,38 +259,50 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("RangedGuitarSprite/Hand:visible")
+tracks/8/path = NodePath("RangedGuitarSprite/Hand:position")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(-7.02372, -1.63319)]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("RangedGuitarSprite/Hand:position")
+tracks/9/path = NodePath("RangedGuitarSprite/Hand:rotation")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-7.02372, -1.63319)]
+"values": [0.0582475]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("RangedGuitarSprite/Hand:rotation")
+tracks/10/path = NodePath("RangedGuitarSprite/NoteSpawn:rotation")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0582475]
+"values": [-0.349066]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("GuitarSprite/MeleeAttack:monitorable")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_nyrjo"]
@@ -358,6 +370,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(-1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RangedGuitarSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GuitarSprite/MeleeAttack:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_4achw"]
 resource_name = "melee_attack_right"
@@ -424,6 +460,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RangedGuitarSprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("GuitarSprite/MeleeAttack:monitorable")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_d7sfl"]
 resource_name = "ranged_attack_left"
@@ -462,7 +522,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.359538]
+"values": [0.349066]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -479,38 +539,148 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RangedGuitarSprite/Hand:visible")
+tracks/4/path = NodePath("RangedGuitarSprite/Hand:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, -2), Vector2(-7, -1), Vector2(-1, 6)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RangedGuitarSprite/Hand:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"ranged_attack_shoot"
+}, {
+"args": [],
+"method": &"ranged_attack_end"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RangedGuitarSprite/NoteSpawn:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.349066]
+}
+
+[sub_resource type="Animation" id="Animation_dcrgb"]
+resource_name = "ranged_attack_right"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RangedGuitarSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("RangedGuitarSprite/Hand:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.366667),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RangedGuitarSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RangedGuitarSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.349066]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RangedGuitarSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RangedGuitarSprite/Hand:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-8, -2), Vector2(-7, -1), Vector2(-1, 6)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"ranged_attack_shoot"
+}, {
+"args": [],
+"method": &"ranged_attack_end"
+}]
+}
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("RangedGuitarSprite/Hand:rotation")
+tracks/6/path = NodePath("RangedGuitarSprite/NoteSpawn:rotation")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0582475]
+"values": [-0.349066]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hvsyn"]
@@ -518,10 +688,15 @@ _data = {
 "RESET": SubResource("Animation_etlop"),
 "melee_attack_left": SubResource("Animation_nyrjo"),
 "melee_attack_right": SubResource("Animation_4achw"),
-"ranged_attack_left": SubResource("Animation_d7sfl")
+"ranged_attack_left": SubResource("Animation_d7sfl"),
+"ranged_attack_right": SubResource("Animation_dcrgb")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fcuw"]
+size = Vector2(8, 16)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_7kraw")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
@@ -530,7 +705,7 @@ texture = ExtResource("2_nk6wo")
 hframes = 5
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_sguhh")
 
@@ -545,8 +720,11 @@ rotation = 0.782508
 texture = ExtResource("3_k8ibn")
 
 [node name="MeleeAttack" type="Area2D" parent="GuitarSprite"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
 
-[node name="Hitbox" type="CollisionShape2D" parent="GuitarSprite/MeleeAttack"]
+[node name="MeleeHitbox" type="CollisionShape2D" parent="GuitarSprite/MeleeAttack"]
 position = Vector2(-3, 3)
 shape = SubResource("CircleShape2D_wvp18")
 
@@ -565,3 +743,19 @@ hframes = 4
 position = Vector2(-7.02372, -1.63319)
 rotation = 0.0582475
 texture = ExtResource("5_08krq")
+
+[node name="NoteSpawn" type="Marker2D" parent="RangedGuitarSprite"]
+position = Vector2(-3, 3)
+rotation = -0.349066
+scale = Vector2(-0.5, 0.5)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_5fcuw")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

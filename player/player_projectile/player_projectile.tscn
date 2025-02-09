@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b87kddsxu0r8s"]
+
+[ext_resource type="Texture2D" uid="uid://bbfsvn0c2a2ck" path="res://player/player_projectile/note.png" id="1_7qs6x"]
+[ext_resource type="Script" path="res://player/player_projectile/player_projectile.gd" id="1_achhs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p26l2"]
+radius = 7.0
+
+[node name="PlayerProjectile" type="Area2D"]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_achhs")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7qs6x")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p26l2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
