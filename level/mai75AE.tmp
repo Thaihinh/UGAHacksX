@@ -87,67 +87,67 @@ repeat_times = 3
 [node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D"]
 texture = SubResource("CompressedTexture2D_qlj2t")
 
-[node name="SpawnerLeft" type="Marker2D" parent="."]
+[node name="Spawner" type="Marker2D" parent="."]
 position = Vector2(-375, -258)
 script = ExtResource("4_ft5r6")
 
-[node name="Respawn" type="Timer" parent="SpawnerLeft"]
+[node name="Respawn" type="Timer" parent="Spawner"]
 wait_time = 10.0
 autostart = true
 
-[node name="Difficulty1" type="Timer" parent="SpawnerLeft"]
+[node name="Difficulty1" type="Timer" parent="Spawner"]
 wait_time = 30.0
 one_shot = true
 autostart = true
 
-[node name="Difficulty2" type="Timer" parent="SpawnerLeft"]
+[node name="Difficulty2" type="Timer" parent="Spawner"]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="SpawnerRight" type="Marker2D" parent="."]
+[node name="Spawner2" type="Marker2D" parent="."]
 position = Vector2(368, -271)
 script = ExtResource("4_ft5r6")
 
-[node name="Respawn" type="Timer" parent="SpawnerRight"]
-wait_time = 8.0
+[node name="Respawn" type="Timer" parent="Spawner2"]
+wait_time = 10.0
 autostart = true
 
-[node name="Difficulty1" type="Timer" parent="SpawnerRight"]
-wait_time = 31.0
+[node name="Difficulty1" type="Timer" parent="Spawner2"]
+wait_time = 30.0
 one_shot = true
 autostart = true
 
-[node name="Difficulty2" type="Timer" parent="SpawnerRight"]
+[node name="Difficulty2" type="Timer" parent="Spawner2"]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="SpawnerUp" type="Marker2D" parent="."]
+[node name="Spawner3" type="Marker2D" parent="."]
 position = Vector2(-1, -289)
 script = ExtResource("4_ft5r6")
 
-[node name="Respawn" type="Timer" parent="SpawnerUp"]
-wait_time = 9.0
+[node name="Respawn" type="Timer" parent="Spawner3"]
+wait_time = 10.0
 autostart = true
 
-[node name="Difficulty1" type="Timer" parent="SpawnerUp"]
-wait_time = 32.0
+[node name="Difficulty1" type="Timer" parent="Spawner3"]
+wait_time = 30.0
 one_shot = true
 autostart = true
 
-[node name="Difficulty2" type="Timer" parent="SpawnerUp"]
+[node name="Difficulty2" type="Timer" parent="Spawner3"]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="StartingSlimeRight" parent="." instance=ExtResource("3_noim0")]
+[node name="StartingSlimeE" parent="." instance=ExtResource("3_noim0")]
 position = Vector2(377, -253)
 
-[node name="StartingSlimeUp" parent="." instance=ExtResource("3_noim0")]
+[node name="StartingSlime" parent="." instance=ExtResource("3_noim0")]
 position = Vector2(1, -218)
 
-[node name="StartingSlimeLeft" parent="." instance=ExtResource("3_noim0")]
+[node name="StartingSlimeW" parent="." instance=ExtResource("3_noim0")]
 position = Vector2(-381, -249)
 
 [node name="Timer" type="Timer" parent="."]
@@ -166,11 +166,8 @@ max_distance = 3000.0
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 558.0
-offset_top = 239.0
-offset_right = 598.0
-offset_bottom = 279.0
-scale = Vector2(3, 3)
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Scoreboard" type="Label" parent="CanvasLayer/UI"]
 layout_mode = 0
@@ -218,16 +215,13 @@ text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOver" type="CanvasLayer" parent="."]
-layer = 2
-
-[connection signal="timeout" from="SpawnerLeft/Respawn" to="SpawnerLeft" method="_on_respawn_timeout"]
-[connection signal="timeout" from="SpawnerLeft/Difficulty1" to="SpawnerLeft" method="_on_difficulty_1_timeout"]
-[connection signal="timeout" from="SpawnerLeft/Difficulty2" to="SpawnerLeft" method="_on_difficulty_2_timeout"]
-[connection signal="timeout" from="SpawnerRight/Respawn" to="SpawnerRight" method="_on_respawn_timeout"]
-[connection signal="timeout" from="SpawnerRight/Difficulty1" to="SpawnerRight" method="_on_difficulty_1_timeout"]
-[connection signal="timeout" from="SpawnerRight/Difficulty2" to="SpawnerRight" method="_on_difficulty_2_timeout"]
-[connection signal="timeout" from="SpawnerUp/Respawn" to="SpawnerUp" method="_on_respawn_timeout"]
-[connection signal="timeout" from="SpawnerUp/Difficulty1" to="SpawnerUp" method="_on_difficulty_1_timeout"]
-[connection signal="timeout" from="SpawnerUp/Difficulty2" to="SpawnerUp" method="_on_difficulty_2_timeout"]
+[connection signal="timeout" from="Spawner/Respawn" to="Spawner" method="_on_respawn_timeout"]
+[connection signal="timeout" from="Spawner/Difficulty1" to="Spawner" method="_on_difficulty_1_timeout"]
+[connection signal="timeout" from="Spawner/Difficulty2" to="Spawner" method="_on_difficulty_2_timeout"]
+[connection signal="timeout" from="Spawner2/Respawn" to="Spawner2" method="_on_respawn_timeout"]
+[connection signal="timeout" from="Spawner2/Difficulty1" to="Spawner2" method="_on_difficulty_1_timeout"]
+[connection signal="timeout" from="Spawner2/Difficulty2" to="Spawner2" method="_on_difficulty_2_timeout"]
+[connection signal="timeout" from="Spawner3/Respawn" to="Spawner3" method="_on_respawn_timeout"]
+[connection signal="timeout" from="Spawner3/Difficulty1" to="Spawner3" method="_on_difficulty_1_timeout"]
+[connection signal="timeout" from="Spawner3/Difficulty2" to="Spawner3" method="_on_difficulty_2_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

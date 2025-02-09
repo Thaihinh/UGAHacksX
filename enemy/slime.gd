@@ -26,8 +26,9 @@ func _process(delta):
 	move_and_slide()
 	
 func _on_hurtbox_area_entered(area: Area2D) -> void:
+	Global.kills += 1
+	Global.score += 10
 	queue_free()
-
 
 func _on_jump_timeout() -> void:
 	velocity.y += JUMP_VELOCITY

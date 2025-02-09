@@ -1,10 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcf2nnsho12u6"]
+[gd_scene load_steps=25 format=3 uid="uid://bcf2nnsho12u6"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_7kraw"]
 [ext_resource type="Texture2D" uid="uid://c2v4mnfyn61dc" path="res://player/player.png" id="2_nk6wo"]
 [ext_resource type="Texture2D" uid="uid://c753utfgq80b0" path="res://player/guitar.png" id="3_k8ibn"]
 [ext_resource type="Texture2D" uid="uid://cobxpi5hq73rk" path="res://player/ranged_guitar.png" id="4_8eepe"]
+[ext_resource type="AudioStream" uid="uid://clntxr3nto3yn" path="res://audio/guitarsmash.mp3" id="4_ryc8i"]
 [ext_resource type="Texture2D" uid="uid://wyvp6xq8pgtf" path="res://player/hand.png" id="5_08krq"]
+[ext_resource type="AudioStream" uid="uid://w2monu2hf6u1" path="res://audio/guitarstrum.mp3" id="6_wshgs"]
+[ext_resource type="AudioStream" uid="uid://wfoqthrydffx" path="res://audio/slime.mp3" id="8_f1mor"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sguhh"]
 size = Vector2(8, 16)
@@ -36,6 +39,22 @@ tracks/1/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_wond5"]
+resource_name = "falling"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
 [sub_resource type="Animation" id="Animation_nfu2g"]
 resource_name = "idle"
 length = 0.001
@@ -50,23 +69,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_rjtnk"]
-resource_name = "walking"
-length = 0.5
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_evlx3"]
@@ -99,22 +101,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_wond5"]
-resource_name = "falling"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
 [sub_resource type="Animation" id="Animation_k4vfm"]
 resource_name = "landing"
 length = 0.1
@@ -143,6 +129,23 @@ tracks/1/keys = {
 "args": [],
 "method": &"land"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_rjtnk"]
+resource_name = "walking"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_64e3o"]
@@ -351,9 +354,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"melee_sound"
+}, {
 "args": [],
 "method": &"attack_end"
 }]
@@ -441,9 +447,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"melee_sound"
+}, {
 "args": [],
 "method": &"attack_end"
 }]
@@ -728,6 +737,9 @@ monitoring = false
 position = Vector2(-3, 3)
 shape = SubResource("CircleShape2D_wvp18")
 
+[node name="MeleeAudio" type="AudioStreamPlayer2D" parent="GuitarSprite"]
+stream = ExtResource("4_ryc8i")
+
 [node name="AttackAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_hvsyn")
@@ -749,6 +761,11 @@ position = Vector2(-3, 3)
 rotation = -0.349066
 scale = Vector2(-0.5, 0.5)
 
+[node name="RangedAudio" type="AudioStreamPlayer2D" parent="RangedGuitarSprite"]
+position = Vector2(0.232376, -2.22396)
+rotation = -0.359538
+stream = ExtResource("6_wshgs")
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -757,5 +774,11 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_5fcuw")
+
+[node name="Invincibility" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hurtsound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_f1mor")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

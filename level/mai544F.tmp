@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://4ekyy1pirh6s"]
+[gd_scene load_steps=10 format=4 uid="uid://4ekyy1pirh6s"]
 
 [ext_resource type="Script" path="res://level/main.gd" id="1_8b4tw"]
 [ext_resource type="Texture2D" uid="uid://dwvgd244bg4a6" path="res://level/tileset.png" id="1_sbhvg"]
 [ext_resource type="PackedScene" uid="uid://bcf2nnsho12u6" path="res://player/player.tscn" id="2_xu5y8"]
 [ext_resource type="PackedScene" uid="uid://poy26nx5grpe" path="res://enemy/slime.tscn" id="3_noim0"]
-[ext_resource type="Texture2D" uid="uid://bqlymidt3s2ob" path="res://level/heart.png" id="4_081yu"]
 [ext_resource type="Script" path="res://level/spawner.gd" id="4_ft5r6"]
-[ext_resource type="AudioStream" uid="uid://1x6ig30u7a26" path="res://audio/gamesong.wav" id="7_5owkx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1te8k"]
 texture = ExtResource("1_sbhvg")
@@ -45,10 +43,10 @@ texture = ExtResource("1_sbhvg")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_1te8k")
 
+[sub_resource type="FontVariation" id="FontVariation_uma5g"]
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qlj2t"]
 load_path = "res://.godot/imported/background.png-7cc287d099ef689961c37316554301ed.ctex"
-
-[sub_resource type="FontVariation" id="FontVariation_uma5g"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_8b4tw")
@@ -73,6 +71,29 @@ drag_top_margin = 0.05
 drag_right_margin = 0.01
 drag_bottom_margin = 0.01
 
+[node name="UI" type="Control" parent="Player/Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_top = 19.0
+offset_right = 39.0
+offset_bottom = 59.0
+
+[node name="Scoreboard" type="Label" parent="Player/Camera2D/UI"]
+layout_mode = 0
+offset_left = -28.0
+offset_top = -100.0
+offset_right = 33.0
+offset_bottom = -51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = SubResource("FontVariation_uma5g")
+theme_override_font_sizes/font_size = 11
+text = "Score: 0
+Kills: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Background" type="Node2D" parent="."]
 z_index = -1
 position = Vector2(576, 325)
@@ -87,147 +108,79 @@ repeat_times = 3
 [node name="Sprite2D" type="Sprite2D" parent="Background/Parallax2D"]
 texture = SubResource("CompressedTexture2D_qlj2t")
 
-[node name="SpawnerLeft" type="Marker2D" parent="."]
+[node name="Spawner" type="Marker2D" parent="."]
 position = Vector2(-375, -258)
 script = ExtResource("4_ft5r6")
 
-[node name="Respawn" type="Timer" parent="SpawnerLeft"]
+[node name="Respawn" type="Timer" parent="Spawner"]
 wait_time = 10.0
 autostart = true
 
-[node name="Difficulty1" type="Timer" parent="SpawnerLeft"]
+[node name="Difficulty1" type="Timer" parent="Spawner"]
 wait_time = 30.0
 one_shot = true
 autostart = true
 
-[node name="Difficulty2" type="Timer" parent="SpawnerLeft"]
+[node name="Difficulty2" type="Timer" parent="Spawner"]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="SpawnerRight" type="Marker2D" parent="."]
+[node name="Spawner2" type="Marker2D" parent="."]
 position = Vector2(368, -271)
 script = ExtResource("4_ft5r6")
 
-[node name="Respawn" type="Timer" parent="SpawnerRight"]
-wait_time = 8.0
+[node name="Respawn" type="Timer" parent="Spawner2"]
+wait_time = 10.0
 autostart = true
 
-[node name="Difficulty1" type="Timer" parent="SpawnerRight"]
-wait_time = 31.0
+[node name="Difficulty1" type="Timer" parent="Spawner2"]
+wait_time = 30.0
 one_shot = true
 autostart = true
 
-[node name="Difficulty2" type="Timer" parent="SpawnerRight"]
+[node name="Difficulty2" type="Timer" parent="Spawner2"]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="SpawnerUp" type="Marker2D" parent="."]
+[node name="Spawner3" type="Marker2D" parent="."]
 position = Vector2(-1, -289)
 script = ExtResource("4_ft5r6")
 
-[node name="Respawn" type="Timer" parent="SpawnerUp"]
-wait_time = 9.0
+[node name="Respawn" type="Timer" parent="Spawner3"]
+wait_time = 10.0
 autostart = true
 
-[node name="Difficulty1" type="Timer" parent="SpawnerUp"]
-wait_time = 32.0
+[node name="Difficulty1" type="Timer" parent="Spawner3"]
+wait_time = 30.0
 one_shot = true
 autostart = true
 
-[node name="Difficulty2" type="Timer" parent="SpawnerUp"]
+[node name="Difficulty2" type="Timer" parent="Spawner3"]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
-[node name="StartingSlimeRight" parent="." instance=ExtResource("3_noim0")]
+[node name="StartingSlimeE" parent="." instance=ExtResource("3_noim0")]
 position = Vector2(377, -253)
 
-[node name="StartingSlimeUp" parent="." instance=ExtResource("3_noim0")]
+[node name="StartingSlime" parent="." instance=ExtResource("3_noim0")]
 position = Vector2(1, -218)
 
-[node name="StartingSlimeLeft" parent="." instance=ExtResource("3_noim0")]
+[node name="StartingSlimeW" parent="." instance=ExtResource("3_noim0")]
 position = Vector2(-381, -249)
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
-
-[node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_5owkx")
-autoplay = true
-max_distance = 3000.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UI" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 558.0
-offset_top = 239.0
-offset_right = 598.0
-offset_bottom = 279.0
-scale = Vector2(3, 3)
-
-[node name="Scoreboard" type="Label" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_left = -31.0
-offset_top = -78.0
-offset_right = 30.0
-offset_bottom = -62.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = 0
-theme_override_fonts/font = SubResource("FontVariation_uma5g")
-theme_override_font_sizes/font_size = 11
-text = "Score: 0
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Kills" type="Label" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_left = -30.0
-offset_top = -64.0
-offset_right = 31.0
-offset_bottom = -48.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = 0
-theme_override_fonts/font = SubResource("FontVariation_uma5g")
-theme_override_font_sizes/font_size = 11
-text = "Kills: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Heart" type="Sprite2D" parent="CanvasLayer/UI"]
-position = Vector2(0, -40)
-texture = ExtResource("4_081yu")
-
-[node name="Health" type="Label" parent="CanvasLayer/UI/Heart"]
-offset_left = -2.0
-offset_top = -4.0
-offset_right = 3.0
-offset_bottom = 8.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/line_spacing = 0
-theme_override_fonts/font = SubResource("FontVariation_uma5g")
-theme_override_font_sizes/font_size = 8
-text = "5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GameOver" type="CanvasLayer" parent="."]
-layer = 2
-
-[connection signal="timeout" from="SpawnerLeft/Respawn" to="SpawnerLeft" method="_on_respawn_timeout"]
-[connection signal="timeout" from="SpawnerLeft/Difficulty1" to="SpawnerLeft" method="_on_difficulty_1_timeout"]
-[connection signal="timeout" from="SpawnerLeft/Difficulty2" to="SpawnerLeft" method="_on_difficulty_2_timeout"]
-[connection signal="timeout" from="SpawnerRight/Respawn" to="SpawnerRight" method="_on_respawn_timeout"]
-[connection signal="timeout" from="SpawnerRight/Difficulty1" to="SpawnerRight" method="_on_difficulty_1_timeout"]
-[connection signal="timeout" from="SpawnerRight/Difficulty2" to="SpawnerRight" method="_on_difficulty_2_timeout"]
-[connection signal="timeout" from="SpawnerUp/Respawn" to="SpawnerUp" method="_on_respawn_timeout"]
-[connection signal="timeout" from="SpawnerUp/Difficulty1" to="SpawnerUp" method="_on_difficulty_1_timeout"]
-[connection signal="timeout" from="SpawnerUp/Difficulty2" to="SpawnerUp" method="_on_difficulty_2_timeout"]
+[connection signal="timeout" from="Spawner/Respawn" to="Spawner" method="_on_respawn_timeout"]
+[connection signal="timeout" from="Spawner/Difficulty1" to="Spawner" method="_on_difficulty_1_timeout"]
+[connection signal="timeout" from="Spawner/Difficulty2" to="Spawner" method="_on_difficulty_2_timeout"]
+[connection signal="timeout" from="Spawner2/Respawn" to="Spawner2" method="_on_respawn_timeout"]
+[connection signal="timeout" from="Spawner2/Difficulty1" to="Spawner2" method="_on_difficulty_1_timeout"]
+[connection signal="timeout" from="Spawner2/Difficulty2" to="Spawner2" method="_on_difficulty_2_timeout"]
+[connection signal="timeout" from="Spawner3/Respawn" to="Spawner3" method="_on_respawn_timeout"]
+[connection signal="timeout" from="Spawner3/Difficulty1" to="Spawner3" method="_on_difficulty_1_timeout"]
+[connection signal="timeout" from="Spawner3/Difficulty2" to="Spawner3" method="_on_difficulty_2_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

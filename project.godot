@@ -15,6 +15,20 @@ run/main_scene="res://level/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://persistent/global.gd"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+
+[importer_defaults]
+
+wav={
+"edit/loop_mode": 2
+}
+
 [input]
 
 melee_attack={

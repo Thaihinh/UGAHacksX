@@ -128,6 +128,7 @@ func attack_end() -> void:
 func ranged_attack_shoot() -> void:
 	var projectile = ranged_projectile.instantiate()
 	owner.add_child(projectile)
+	$RangedGuitarSprite/RangedAudio.play()
 	projectile.transform = $RangedGuitarSprite/NoteSpawn.global_transform
 
 func ranged_attack_end() -> void:
@@ -137,5 +138,12 @@ func ranged_attack_end() -> void:
 		$RangedGuitarSprite.visible = false
 		$PlayerSprite.texture = arms
 
+func melee_sound() -> void:
+	$GuitarSprite/MeleeAudio.play()
+
+# Taking damage
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	print_debug("Enemy detected")
+	if $Invincibility.is_stopped():
+		$Hurtsound.play()
+		$Invincibility.start()
+		Global.health -= 1
