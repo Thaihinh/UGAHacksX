@@ -2,9 +2,15 @@ extends CharacterBody2D
 
 enum States {IDLE, WALKING, JUMPING, FALLING, LANDING}
 
+var arms: Texture2D = preload("res://player/player.png")
+var no_arms: Texture2D = preload("res://player/player_no_arms.png")
 var state: States = States.IDLE
 var jumping: bool = false
-var coyote: bool = true
+var auto_melee: bool = false
+var auto_ranged: bool = false
+var attacking: bool = false
+var attack_direction: int = 0
+var ranged_projectile: PackedScene
 
 const SPEED: float = 150.0
 const JUMP_VELOCITY: float = -250.0
@@ -20,6 +26,8 @@ func _physics_process(delta: float) -> void:
 		jumping = true
 	if Input.is_action_just_released("ui_accept"):
 		jumping = false
+		
+	
 	
 	# Jumping
 	if jumping and is_on_floor() and state != States.JUMPING and state != States.LANDING:
@@ -27,10 +35,34 @@ func _physics_process(delta: float) -> void:
 
 	# Movement
 	var direction := Input.get_axis("ui_left", "ui_right")
+	if direction != 0:
+		attack_direction = direction
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	# Auto melee
+	if Input.is_action_just_pressed("melee_attack"):
+		auto_melee = true
+	if Input.is_action_just_released("melee_attack"):
+		auto_melee = false
+	
+	# Attack implementation
+	if auto_melee and not attacking:
+		$PlayerSprite.texture = no_arms
+		attacking = true
+		if attack_direction > 0:
+			$AttackAnimation.play("melee_attack_right")
+		else:
+			$AttackAnimation.play("melee_attack_left")
+	elif auto_ranged and not attacking:
+		$PlayerSprite.texture = no_arms
+		attacking = true
+		if attack_direction > 0:
+			$AttackAnimation.play("melee_attack_right")
+		else:
+			$AttackAnimation.play("melee_attack_left")
 	
 	# Landing
 	if is_on_floor() and state == States.FALLING:
@@ -39,9 +71,9 @@ func _physics_process(delta: float) -> void:
 	if (velocity.x != 0):
 		# Sprite Direction
 		if velocity.x > 0:
-			$Sprite.scale.x = 1
+			$PlayerSprite.scale.x = 1
 		elif velocity.x < 0:
-			$Sprite.scale.x = -1
+			$PlayerSprite.scale.x = -1
 		
 		# Walking animation if grounded
 		if is_on_floor() and state != States.JUMPING and state != States.LANDING:
@@ -60,15 +92,15 @@ func set_state(new_state: States) -> void:
 	state = new_state
 	match state:
 		States.IDLE:
-			$AnimationPlayer.play("idle")
+			$PlayerAnimation.play("idle")
 		States.WALKING:
-			$AnimationPlayer.play("walking")
+			$PlayerAnimation.play("walking")
 		States.JUMPING:
-			$AnimationPlayer.play("jump")
+			$PlayerAnimation.play("jump")
 		States.FALLING:
-			$AnimationPlayer.play("falling")
+			$PlayerAnimation.play("falling")
 		States.LANDING:
-			$AnimationPlayer.play("landing")
+			$PlayerAnimation.play("landing")
 
 # Animation calls
 func jump() -> void:
@@ -76,3 +108,14 @@ func jump() -> void:
 
 func land() -> void:
 	set_state(States.IDLE)
+
+func attack_end() -> void:
+	attacking = false
+	if not auto_melee:
+		$PlayerSprite.texture = arms
+
+func ranged_attack_shoot() -> void:
+	return
+
+func ranged_attack_end() -> void:
+	attacking = false
