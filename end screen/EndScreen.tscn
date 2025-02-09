@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc2grv1ki174x"]
+
+[ext_resource type="Script" path="res://end screen/end_screen.gd" id="1_thlc3"]
+[ext_resource type="Texture2D" uid="uid://ckdt5k7wv7x7v" path="res://level/background.png" id="2_o3n18"]
+[ext_resource type="Script" path="res://end screen/title.gd" id="3_fbtbt"]
+[ext_resource type="Script" path="res://end screen/retry_button.gd" id="3_wtwfm"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_right = -777.0
+offset_bottom = -436.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_thlc3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -9.0
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("2_o3n18")
+expand_mode = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 342.0
+offset_top = 145.0
+offset_right = 769.0
+offset_bottom = 282.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "SCORE: 0"
+
+[node name="GameOverLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 20.0
+offset_right = 839.0
+offset_bottom = 157.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="TitleButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 431.0
+offset_right = 886.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 100
+text = "TITLE"
+icon_alignment = 1
+script = ExtResource("3_fbtbt")
+
+[node name="RetryButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 431.0
+offset_right = 475.0
+offset_bottom = 576.0
+theme_override_font_sizes/font_size = 100
+text = "RETRY"
+script = ExtResource("3_wtwfm")
+
+[node name="KillsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 271.0
+offset_right = 744.0
+offset_bottom = 408.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "KILLS: 0"

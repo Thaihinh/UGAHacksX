@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://level/main.gd" id="1_8b4tw"]
 [ext_resource type="Texture2D" uid="uid://dwvgd244bg4a6" path="res://level/tileset.png" id="1_sbhvg"]
 [ext_resource type="PackedScene" uid="uid://bcf2nnsho12u6" path="res://player/player.tscn" id="2_xu5y8"]
-[ext_resource type="PackedScene" uid="uid://poy26nx5grpe" path="res://enemy/slime.tscn" id="3_noim0"]
+[ext_resource type="PackedScene" uid="uid://c6b1rnteoo8gx" path="res://enemy/slime.tscn" id="3_noim0"]
 [ext_resource type="Texture2D" uid="uid://bqlymidt3s2ob" path="res://level/heart.png" id="4_081yu"]
 [ext_resource type="Script" path="res://level/spawner.gd" id="4_ft5r6"]
 [ext_resource type="AudioStream" uid="uid://1x6ig30u7a26" path="res://audio/gamesong.wav" id="7_5owkx"]
@@ -217,9 +217,6 @@ theme_override_font_sizes/font_size = 8
 text = "5"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="GameOver" type="CanvasLayer" parent="."]
-layer = 2
 
 [connection signal="timeout" from="SpawnerLeft/Respawn" to="SpawnerLeft" method="_on_respawn_timeout"]
 [connection signal="timeout" from="SpawnerLeft/Difficulty1" to="SpawnerLeft" method="_on_difficulty_1_timeout"]

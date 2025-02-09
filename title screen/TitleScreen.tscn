@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhprm8b6ved12"]
+
+[ext_resource type="FontFile" uid="uid://d1egroxgyfewl" path="res://fonts/poco/Poco.ttf" id="1_8cxgk"]
+[ext_resource type="Texture2D" uid="uid://ckdt5k7wv7x7v" path="res://level/background.png" id="1_ifpik"]
+[ext_resource type="Script" path="res://title screen/start_button.gd" id="2_dwik4"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartImage" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1158.0
+offset_bottom = 651.0
+texture = ExtResource("1_ifpik")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 142.0
+offset_right = 1102.0
+offset_bottom = 322.0
+theme_override_colors/font_color = Color(0.964364, 0.815666, 0.259373, 1)
+theme_override_fonts/font = ExtResource("1_8cxgk")
+theme_override_font_sizes/font_size = 150
+text = "BARD ADVENTURE"
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 381.0
+offset_right = 703.0
+offset_bottom = 509.0
+theme_override_fonts/font = ExtResource("1_8cxgk")
+theme_override_font_sizes/font_size = 100
+text = "START"
+script = ExtResource("2_dwik4")
